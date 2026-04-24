@@ -49,10 +49,7 @@ class FixedDepositAccount : public Account {
     double getMinBalance() override{return 1000.0;}
     double getInterestRate() override{return 0.08;}
 };
-class StudentAccount : public Account {
-    double getMinBalance() override{return 20.0;}
-    double getInterestRate() override{return 0.03;}
-};
+
 
 //DATA STRUCTURES AND ORGANISING
 struct Transaction {
@@ -66,12 +63,14 @@ struct Teller {
     char tellerID[10], name[50], password[50], branchCode[10];
 };
 
+
 struct CustomerRecord {
     char accNum[30], name[50], idNumber[15], contact[15], email[50], address[100], dob[15], pin[50];
     int type;
     double balance;
     int loginAttempts = 0;
 };
+
 
 //SYSTEM LOGIC
 class BankSystem {
@@ -82,6 +81,7 @@ public:
         }
         return -1;
     }
+
 
     static void logTransaction(string acc, string type, double amt) {
         Transaction t;
