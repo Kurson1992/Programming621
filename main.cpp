@@ -8,6 +8,8 @@
 
 using namespace std;
 
+
+
 string encrypt (string data){
     for (char &c : data)c^='K' ;
     return data;
@@ -19,17 +21,19 @@ struct Branch {
     string location;
     double totalDeposits;
 };
+
+
 vector<Branch> branches = {
-    {"DBN01", "Durban Central", 0.0},
-    {"JHB01", "Johannesburg North", 0.0},
-    {"CPT01", "Cape Town Waterfront", 0.0}
+    {"DBN01", "Durban CBD", 0.0},
+    {"JHB01", "Johannesburg CBD", 0.0},
+    {"CPT01", "Cape Town CBD", 0.0}
 };
 
-//ACCOUNT TYPES
+//Account type setup
 class Account {
 public:
     virtual double getMinBalance() = 0;
-    virtual double getInterestRate() = 0; // For 1.5.1
+    virtual double getInterestRate() = 0;
     virtual ~Account() = default;
 };
 
@@ -104,7 +108,7 @@ public:
         }
 
         int choice;
-        cout << "\n1. Deposit\n2. Withdraw\n3. Apply Interest\n4. Statement\nChoice: ";
+        cout << "\n1. Deposit\n2. Withdraw\n3. Apply Interest\n4. bank Statement\nChoice: ";
         cin >> choice;
 
         try {
