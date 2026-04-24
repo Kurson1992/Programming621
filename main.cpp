@@ -8,27 +8,24 @@
 
 using namespace std;
 
-// --- UTILITIES ---
-string encrypt(string data) {
-    char key = 'K';
-    for (int i = 0; i < data.size(); i++) data[i] ^= key;
+string encrypt (string data){
+    for (char &c : data)c^='K' ;
     return data;
 }
 
-// --- BRANCH MANAGEMENT ---
+//Multiple Branch Management
 struct Branch {
     string code;
     string location;
     double totalDeposits;
 };
-
 vector<Branch> branches = {
     {"DBN01", "Durban Central", 0.0},
     {"JHB01", "Johannesburg North", 0.0},
     {"CPT01", "Cape Town Waterfront", 0.0}
 };
 
-// --- ACCOUNT TYPES ---
+//ACCOUNT TYPES
 class Account {
 public:
     virtual double getMinBalance() = 0;
@@ -45,15 +42,15 @@ class ChequeAccount : public Account {
     double getInterestRate() override { return 0.02; }
 };
 class FixedDepositAccount : public Account {
-    double getMinBalance() override { return 1000.0; }
-    double getInterestRate() override { return 0.08; }
+    double getMinBalance() override{return 1000.0;}
+    double getInterestRate() override{return 0.08;}
 };
 class StudentAccount : public Account {
-    double getMinBalance() override { return 20.0; }
-    double getInterestRate() override { return 0.03; }
+    double getMinBalance() override{return 20.0;}
+    double getInterestRate() override{return 0.03;}
 };
 
-// --- DATA STRUCTURES ---
+//DATA STRUCTURES AND ORGANISING
 struct Transaction {
     char accNum[30];
     char type[20];
@@ -72,10 +69,9 @@ struct CustomerRecord {
     int loginAttempts = 0;
 };
 
-// --- SYSTEM LOGIC ---
+//SYSTEM LOGIC
 class BankSystem {
 public:
-    // 1.5.2 Linear Search Implementation
     static int findCustomerIndex(const string& accNo, vector<CustomerRecord>& list) {
         for (int i = 0; i < list.size(); i++) {
             if (string(list[i].accNum) == accNo) return i;
@@ -96,7 +92,7 @@ public:
         out.close();
     }
 
-    // 1.3 & 1.5 Transactions & Interest
+    //Calculations for Transactions & Interest
     static void performTransaction(CustomerRecord& c, bool isTellerAssisted) {
         if (isTellerAssisted) {
             string pinCheck;
@@ -125,14 +121,14 @@ public:
                 logTransaction(c.accNum, "WITHDRAW", amt);
                 cout << "Success.\n";
             }
-            else if (choice == 3) { // 1.5.1 Interest Calculation
+            else if (choice == 3) {//How to calculate interest on balances
                 double rate = (c.type == 1) ? 0.05 : (c.type == 2) ? 0.02 : (c.type == 3) ? 0.08 : 0.03;
                 double interest = c.balance * rate;
                 c.balance += interest;
                 logTransaction(c.accNum, "INTEREST", interest);
                 cout << "Interest of R" << interest << " applied.\n";
             }
-            else if (choice == 4) { // 1.3.2 Account Statement
+            else if (choice == 4) {//Account Statement
                 ifstream in("transactions.dat", ios::binary);
                 Transaction t;
                 cout << "\n--- Statement for " << c.accNum << " ---\n";
@@ -147,7 +143,7 @@ public:
         }
     }
 
-    // 1.4 Branch Management
+    //Branch Management
     static void branchManagement() {
         cout << "\n--- Branch Comparison ---\n";
         for (auto& b : branches) {
@@ -155,7 +151,7 @@ public:
         }
     }
 
-    // 1.6.1 Reporting
+    //Reporting
     static void dailyReport() {
         ifstream in("customers.dat", ios::binary);
         CustomerRecord c;
