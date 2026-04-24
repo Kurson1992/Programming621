@@ -1,0 +1,16 @@
+//
+// Created by kurse on 2026/04/22.
+//
+
+#ifndef CLIONPROJECTS_PROGRAMMING621_H
+#define CLIONPROJECTS_PROGRAMMING621_H
+
+
+
+class Programming621 {
+
+};
+
+
+
+#endif //CLIONPROJECTS_PROGRAMMING621_H
