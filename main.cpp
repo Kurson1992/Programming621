@@ -273,7 +273,7 @@ int main() {
 
     int choice;
     while (true) {
-        cout << "\n--- STANDARD BANK CORE ---\n1. Teller Login\n2. Customer Login\n3. Exit\nChoice: ";
+        cout << "\n Welcome to Moodley's Bank \n1. Teller Login\n2. Customer Login\n3. Exit\nChoice: ";
         cin >> choice;
         if (choice == 1) sys.handleTellerLogin();
         else if (choice == 2) sys.handleCustomerLogin();
